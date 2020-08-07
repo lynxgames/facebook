@@ -1,3 +1,3 @@
-module github.com/huandu/facebook/v2
+module github.com/lynxgames/facebook/v2
 
-go 1.12
+go 1.14
