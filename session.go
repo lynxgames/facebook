@@ -41,6 +41,7 @@ var (
 		"graph":       "https://graph.facebook.com/",
 		"graph_video": "https://graph-video.facebook.com/",
 		"www":         "https://www.facebook.com/",
+		"graph2":      "https://graph.fb.gg/",
 	}
 
 	// checks whether it's a video post.
@@ -61,6 +62,8 @@ type Session struct {
 
 	enableAppsecretProof bool   // add "appsecret_proof" parameter in every facebook API call.
 	appsecretProof       string // pre-calculated "appsecret_proof" value.
+
+	IsPlay2 bool
 
 	debug DebugMode // using facebook debugging api in every request.
 
@@ -387,7 +390,11 @@ func (session *Session) graph(path string, method Method, params Params) (res Re
 	if session.isVideoPost(path, method) {
 		graphURL = session.getURL("graph_video", path, urlParams)
 	} else {
-		graphURL = session.getURL("graph", path, urlParams)
+		if session.IsPlay2 == true {
+			graphURL = session.getURL("graph2", path, urlParams)
+		} else {
+			graphURL = session.getURL("graph", path, urlParams)
+		}
 	}
 
 	var response *http.Response

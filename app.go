@@ -30,6 +30,8 @@ type App struct {
 	// Enable appsecret proof in every API call to facebook.
 	// Facebook document: https://developers.facebook.com/docs/graph-api/securing-requests
 	EnableAppsecretProof bool
+
+	IsPlay2 bool
 }
 
 // New creates a new App and sets app id and secret.
@@ -234,6 +236,7 @@ func (app *App) Session(accessToken string) *Session {
 		accessToken:          accessToken,
 		app:                  app,
 		enableAppsecretProof: app.EnableAppsecretProof,
+		IsPlay2:              app.IsPlay2,
 	}
 }
 
